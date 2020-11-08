@@ -140,8 +140,8 @@ try:
     car = Car()
     air = Aircraft()
     car.set_speed(50)
-except wrong_input:
-    print(f'Wrong input')
+except wrong_input as e:
+    print(f'{e}')
 except Exception:
     print('Wrong speed number')
 try:
@@ -153,8 +153,8 @@ try:
     print(l.change_into_km_from_meters(c))
 except NameError as e:
     print(f'Error:{e}')
-except wrong_input:
-    print(f'Wrong input')
+except wrong_input as e:
+    print(f'{e}')
 except Exception:
    print(f'Coordinates can ту only from -90 to 90 if it`s latitude and from -180 to 180 if it`s longitude ')
 
