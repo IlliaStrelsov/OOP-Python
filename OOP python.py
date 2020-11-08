@@ -15,6 +15,10 @@ class Car(Transport):
         return self.__speed
 
     def set_speed(self, new_speed):
+        if (type(new_speed) == str):
+            raise wrong_input('Wrong input')
+        if(new_speed>250 or new_speed<30):
+            raise Exception
         self.__speed = new_speed
 
 
@@ -25,6 +29,10 @@ class Train(Transport):
         return self.__speed
 
     def set_speed(self, new_speed):
+        if (type(new_speed) == str):
+            raise wrong_input('Wrong input')
+        if (new_speed > 250 or new_speed < 30):
+            raise Exception
         self.__speed = new_speed
 
 
@@ -35,6 +43,10 @@ class Aircraft(Transport):
         return self.__speed
 
     def set_speed(self, new_speed):
+        if (type(new_speed) == str):
+            raise wrong_input('Wrong input')
+        if (new_speed > 3000 or new_speed < 300):
+            raise Exception
         self.__speed = new_speed
 
 
@@ -43,10 +55,18 @@ class Aircraft(Transport):
 
 class Cordinates:
     def __init__(self,x,y):
+        if (type(x) == str or type(y) == str):
+            raise wrong_input('Wrong input')
+        if (y < -180 or y > 180 or x < -90 or x > 90):
+            raise Exception
         self.x = x
         self.y = y
 
     def set_cordinates(self,x,y):
+        if (type(x) == str or type(y) == str):
+            raise wrong_input('Wrong input')
+        if (y < -180 or y > 180 or x < -90 or x > 90):
+            raise Exception
         self.x = x
         self.y = y
 
@@ -109,14 +129,33 @@ class DistantType:
 
 
 
-#example of Multiple inheritance
+class wrong_input(Exception):
+    def __init__(self,msg):
+        super().__init__(msg)
 
 
 
 
-a = Cordinates(77.1539,-139.398)
-b = Cordinates(-77.1804,-139.55)
-d = DirectDistance()
-c = d.get_distance(a,b)
-l = DistantType()
-print(l.change_into_km_from_meters(c))
+try:
+    car = Car()
+    air = Aircraft()
+    car.set_speed(50)
+except wrong_input:
+    print(f'Wrong input')
+except Exception:
+    print('Wrong speed number')
+try:
+    a = Cordinates(67,-139.398)
+    b = Cordinates(67,-139.55)
+    d = DirectDistance()
+    c = d.get_distance(a,b)
+    l = DistantType()
+    print(l.change_into_km_from_meters(c))
+except NameError as e:
+    print(f'Error:{e}')
+except wrong_input:
+    print(f'Wrong input')
+except Exception:
+   print(f'Coordinates can ту only from -90 to 90 if it`s latitude and from -180 to 180 if it`s longitude ')
+
+
